@@ -13,7 +13,7 @@ namespace Sports_Web.Data.Migrations
 
         public override void Up()
         {
-            Execute.Script(@"Data/scripts/data.sql");
+            Execute.Script("Data/scripts/data.sql");
         }
 
 

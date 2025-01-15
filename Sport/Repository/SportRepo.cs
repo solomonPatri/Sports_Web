@@ -1,10 +1,11 @@
 ﻿using Sports_Web.Sport.Model;
 using Sports_Web.Data;
 using Microsoft.EntityFrameworkCore;
+using Sports_Web.Sport.Dtos;
 
 namespace Sports_Web.Sport.Repository
 {
-    public class SportRepo :ISportRepo
+    public class SportRepo : ISportRepo
     {
 
         private readonly AppDbContext _appDbContext;
@@ -24,11 +25,10 @@ namespace Sports_Web.Sport.Repository
 
         }
 
-        public async Task<List<DateOnly>> GetDateSports()
+        public async Task<List<GetSportsDatesDto>> GetDateSports()
         {
 
-            return await _appDbContext.Sports.Select(u=>u.Date)
-                .ToListAsync();
+            return await _appDbContext.Sports.Select(sport => new GetSportsDatesDto { Date=sport.Date, Name=sport.Name }).ToListAsync();
 
 
         }

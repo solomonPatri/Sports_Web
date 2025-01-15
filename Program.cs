@@ -27,6 +27,7 @@ public class Program
             options.UseMySql(builder.Configuration.GetConnectionString("Default")!,
             new MySqlServerVersion(new Version(8, 0, 21))));
 
+        builder.Services.AddScoped<ISportRepo, SportRepo>();
 
         builder.Services.AddFluentMigratorCore()
             .ConfigureRunner(rb => rb.AddMySql5()

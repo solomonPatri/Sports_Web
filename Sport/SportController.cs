@@ -1,7 +1,7 @@
 ﻿using Sports_Web.Sport.Model;
 using Sports_Web.Sport.Repository;
 using Microsoft.AspNetCore.Mvc;
-
+using Sports_Web.Sport.Dtos;
 
 namespace Sports_Web.Sport
 {
@@ -22,7 +22,7 @@ namespace Sports_Web.Sport
 
         [HttpGet("all")]
 
-        public async Task<ActionResult<IEnumerable<Sports>>> GetAllAsync()
+        public async Task<ActionResult<IEnumerable<Sports>>> GetAllSports()
         {
             var sport = await _sportRepo.GetAllAsync();
 
@@ -30,23 +30,23 @@ namespace Sports_Web.Sport
 
         }
 
+        [HttpGet("DatesSports")]
 
-        [HttpGet("DateSports")]
-
-        public async Task<ActionResult<IEnumerable<Sports>>> GetDateSports()
+        public async Task<ActionResult<IEnumerable<GetSportsDatesDto>>> GetDatesSports()
         {
-            var sport = await _sportRepo.GetDateSports();
+
+            List<GetSportsDatesDto> sport = await _sportRepo.GetDateSports();
 
             return Ok(sport);
 
 
-
-
         }
-        
 
-        public async Task<ActionResult<IEnumerable<Sports>>> GetGameTimeOverHour()
+        [HttpGet("GameTime")]
+
+        public async Task<ActionResult<IEnumerable<Sports>>> GetGameTimeSports()
         {
+
             var sport = await _sportRepo.GetGameTimeOverHour();
 
             return Ok(sport);
@@ -54,6 +54,10 @@ namespace Sports_Web.Sport
 
 
         }
+
+
+
+
 
 
 

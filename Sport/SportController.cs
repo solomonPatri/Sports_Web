@@ -2,6 +2,7 @@
 using Sports_Web.Sport.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Sports_Web.Sport.Dtos;
+using System.Security.Policy;
 
 namespace Sports_Web.Sport
 {
@@ -30,32 +31,21 @@ namespace Sports_Web.Sport
 
         }
 
-        [HttpGet("DatesSports")]
 
-        public async Task<ActionResult<IEnumerable<GetSportsDatesDto>>> GetDatesSports()
+        [HttpPost("create")]
+
+        public async Task<ActionResult<CreateSportResponse>> CreateSport([FromBody]CreateSportRequest createSportRequest)
         {
 
-            List<GetSportsDatesDto> sport = await _sportRepo.GetDateSports();
 
-            return Ok(sport);
+            CreateSportResponse create =  await _sportRepo.CreateSport(createSportRequest);
 
 
+
+            return Created("", create);
         }
 
-        [HttpGet("GameTime")]
-
-        public async Task<ActionResult<IEnumerable<Sports>>> GetGameTimeSports()
-        {
-
-            var sport = await _sportRepo.GetGameTimeOverHour();
-
-            return Ok(sport);
-
-
-
-        }
-
-
+       
 
 
 

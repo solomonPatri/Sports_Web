@@ -10,11 +10,9 @@ namespace Sports_Web.Sport.Repository
     {
         Task<List<Sports>> GetAllAsync();
 
-        Task<List<GetSportsDatesDto>> GetDateSports();
+     
 
-        Task<List<Sports>> GetGameTimeOverHour();
-
-        //Task<CreateSportResponse> CreateSport(CreateSportRequest createSportRequest);
+        Task<CreateSportResponse> CreateSport(CreateSportRequest createSportRequest);
 
 
 

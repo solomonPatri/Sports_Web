@@ -2,6 +2,7 @@
 using Sports_Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Sports_Web.Sport.Dtos;
+using AutoMapper;
 
 namespace Sports_Web.Sport.Repository
 {
@@ -10,37 +11,43 @@ namespace Sports_Web.Sport.Repository
 
         private readonly AppDbContext _appDbContext;
 
-        public SportRepo(AppDbContext context)
+        private readonly IMapper _mapper;
+
+        public SportRepo(AppDbContext context,IMapper mapper)
         {
             this._appDbContext = context;
+            this._mapper = mapper;
         }
 
+        public async Task<CreateSportResponse> CreateSport(CreateSportRequest createSportRequest)
+        {
+
+
+            Sports sports = _mapper.Map<Sports>(createSportRequest);
+
+
+
+            _appDbContext.Sports.Add(sports);
+
+            await _appDbContext.SaveChangesAsync();
+
+
+            CreateSportResponse response = _mapper.Map<CreateSportResponse>(sports);
+
+
+            return response;
+        }
 
         public async Task<List<Sports>> GetAllAsync()
         {
+
+
             return await _appDbContext.Sports.ToListAsync();
 
-
-
-
         }
 
-        public async Task<List<GetSportsDatesDto>> GetDateSports()
-        {
-
-            return await _appDbContext.Sports.Select(sport => new GetSportsDatesDto { Date=sport.Date, Name=sport.Name }).ToListAsync();
-
-
-        }
-        public async Task<List<Sports>> GetGameTimeOverHour()
-        {
-            return await _appDbContext.Sports.Where(u => u.GameTime >= 1.0)
-                .ToListAsync();
-
-
-        }
-
-
+    
+       
 
 
 

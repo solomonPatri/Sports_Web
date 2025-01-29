@@ -13,6 +13,10 @@ namespace Sports_Web.Sport.Mappers
 
             CreateMap<CreateSportRequest, Sports>();
             CreateMap<Sports, CreateSportResponse>();
+
+
+
+
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Policy;
 
-
 namespace Sports_Web.Sport.Model
 {
     [Table("sports")]

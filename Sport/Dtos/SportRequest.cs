@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sports_Web.Sport.Dtos
 {
-    public class CreateSportRequest
+    public class SportRequest
     {
        
         public string Name { get; set; }

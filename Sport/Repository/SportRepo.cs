@@ -19,7 +19,7 @@ namespace Sports_Web.Sport.Repository
             this._mapper = mapper;
         }
 
-        public async Task<CreateSportResponse> CreateSport(CreateSportRequest createSportRequest)
+        public async Task<SportResponse> CreateAsync(SportRequest createSportRequest)
         {
 
 
@@ -32,8 +32,23 @@ namespace Sports_Web.Sport.Repository
             await _appDbContext.SaveChangesAsync();
 
 
-            CreateSportResponse response = _mapper.Map<CreateSportResponse>(sports);
+            SportResponse response = _mapper.Map<SportResponse>(sports);
 
+
+            return response;
+        }
+
+        public async Task<SportResponse> DeleteAsync(int id)
+        {
+
+            Sports sport = await _appDbContext.Sports.FindAsync(id);
+
+
+            SportResponse response = _mapper.Map<SportResponse>(sport);
+
+            _appDbContext.Remove(sport);
+
+            await _appDbContext.SaveChangesAsync();
 
             return response;
         }
@@ -46,15 +61,46 @@ namespace Sports_Web.Sport.Repository
 
         }
 
-    
-       
+        public async Task<SportResponse> UpdateAsync(int id, SportUpdateRequest sport)
+        {
+            Sports sports = await _appDbContext.Sports.FindAsync(id);
+
+            if (sport.Name != null)
+            {
+                sports.Name = sport.Name;
+            }
+
+            if (sport.GameTime.HasValue)
+            {
+                sports.GameTime = sport.GameTime.Value;
+            }
+
+            if (sport.Date.HasValue)
+            {
+                sports.Date = sport.Date.Value;
+            }
+
+            if (sport.NrPlayers.HasValue)
+            {
+                sports.NrPlayers = sport.NrPlayers.Value;
+            }
+
+
+            _appDbContext.Sports.Update(sports);
+
+
+            await _appDbContext.SaveChangesAsync();
+
+
+            SportResponse update = _mapper.Map<SportResponse>(sports);
+           
+
+            return update;
 
 
 
 
-
-
-
+        }
     }
 
 

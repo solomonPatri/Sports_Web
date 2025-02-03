@@ -1,6 +1,6 @@
 ﻿namespace Sports_Web.Sport.Dtos
 {
-    public class CreateSportResponse
+    public class SportResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }

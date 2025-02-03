@@ -11,10 +11,9 @@ namespace Sports_Web.Sport.Mappers
         public SportMappingProfile()
         {
 
-            CreateMap<CreateSportRequest, Sports>();
-            CreateMap<Sports, CreateSportResponse>();
-
-
+            CreateMap<SportRequest, Sports>();
+            CreateMap<Sports, SportResponse>();
+            CreateMap<SportResponse, SportUpdateRequest>();
 
 
         }

@@ -12,7 +12,13 @@ namespace Sports_Web.Sport.Repository
 
      
 
-        Task<CreateSportResponse> CreateSport(CreateSportRequest createSportRequest);
+        Task<SportResponse> CreateAsync(SportRequest createSportRequest);
+        Task<SportResponse> DeleteAsync(int id);
+        Task<SportResponse> UpdateAsync(int id,SportUpdateRequest sport);
+
+
+
+
 
 
 

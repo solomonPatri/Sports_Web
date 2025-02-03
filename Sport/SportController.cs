@@ -34,19 +34,40 @@ namespace Sports_Web.Sport
 
         [HttpPost("create")]
 
-        public async Task<ActionResult<CreateSportResponse>> CreateSport([FromBody]CreateSportRequest createSportRequest)
+        public async Task<ActionResult<SportResponse>> CreateSport([FromBody]SportRequest createSportRequest)
         {
 
 
-            CreateSportResponse create =  await _sportRepo.CreateSport(createSportRequest);
+            SportResponse create = await _sportRepo.CreateAsync(createSportRequest);
 
 
 
             return Created("", create);
         }
 
-       
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult<SportResponse>> DeleteSport([FromRoute]int id)
+        {
 
+            SportResponse response = await _sportRepo.DeleteAsync(id);
+
+
+
+            return Accepted("", response);
+
+        }
+
+        [HttpPut("edit/{id}")]
+        public async Task<ActionResult<SportResponse>> EditSport([FromRoute] int id, [FromBody]SportUpdateRequest sport)
+        {
+
+            SportResponse response = await _sportRepo.UpdateAsync(id,sport);
+
+
+
+            return Accepted("", response);
+
+        }
 
 
 

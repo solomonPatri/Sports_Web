@@ -17,15 +17,6 @@ namespace Sports_Web.Data
             get;set;
         }
 
-
-
-
-
-
-
-
-
-
-
+        
     }
 }

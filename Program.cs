@@ -6,6 +6,7 @@ using System;
 using Sports_Web.Data;
 using System.Net.WebSockets;
 using Sports_Web.Sport.Repository;
+using Sports_Web.Sport.Service;
 
 public class Program
 {
@@ -28,6 +29,9 @@ public class Program
             new MySqlServerVersion(new Version(8, 0, 21))));
 
         builder.Services.AddScoped<ISportRepo, SportRepo>();
+
+        builder.Services.AddScoped<ISportCommandService, SportCommandService>();
+        builder.Services.AddScoped<ISportQueryService, SportQueryService>();
 
         builder.Services.AddFluentMigratorCore()
             .ConfigureRunner(rb => rb.AddMySql5()

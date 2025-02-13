@@ -16,9 +16,9 @@ namespace Sports_Web.Sport.Repository
         Task<SportResponse> DeleteAsync(int id);
         Task<SportResponse> UpdateAsync(int id,SportUpdateRequest sport);
 
+        Task<SportResponse> FindByNameAsync(SportRequest Name);
 
-
-
+        Task<SportResponse> FindByIdAsync(int id);
 
 
 

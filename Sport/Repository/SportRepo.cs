@@ -3,6 +3,8 @@ using Sports_Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Sports_Web.Sport.Dtos;
 using AutoMapper;
+using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Sports_Web.Sport.Repository
 {
@@ -96,11 +98,64 @@ namespace Sports_Web.Sport.Repository
            
 
             return update;
+        }
 
+
+        public async Task<SportResponse> FindByNameAsync(SportRequest sports)
+        {
+
+
+
+            Sports sportsSearched= await _appDbContext.Sports.FirstOrDefaultAsync(s=> s.Name.Equals(sports.Name));
+
+            SportResponse response = _mapper.Map<SportResponse>(sportsSearched);
+
+
+            return response;
+
+        
+        }
+
+        public async Task<SportResponse> FindByIdAsync(int id)
+        {
+            Sports sportsearch = await _appDbContext.Sports.FindAsync(id);
+
+            SportResponse response = _mapper.Map<SportResponse>(sportsearch);
+
+            return response;
 
 
 
         }
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 

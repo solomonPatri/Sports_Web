@@ -28,11 +28,11 @@ namespace Sports_Web.Sport.Service
         }
 
 
-        public async Task<SportResponse> FindByNameAsync(SportRequest request)
+        public async Task<SportResponse> FindByNameAsync(string request)
         {
-            if(request != null)
+            SportResponse response = await this._repo.FindByNameAsync(request);
+            if (response != null)
             {
-                SportResponse response = await this._repo.FindByNameAsync(request);
 
                 return response;
 
@@ -46,10 +46,11 @@ namespace Sports_Web.Sport.Service
 
         public async Task<SportResponse> FindByIdAsync(int id)
         {
-            if (id != 0)
-            {
-                SportResponse response = await this._repo.FindByIdAsync(id);
+            SportResponse response = await this._repo.FindByIdAsync(id);
 
+            if (response !=null)
+            {
+              
                 return response;
 
             }
@@ -58,7 +59,20 @@ namespace Sports_Web.Sport.Service
         }
 
 
+        public async  Task<SportNamesList> GetSportsNamesAsync()
+        {
+            SportNamesList response = await _repo.GetSportsNamesAsync();
 
+            if(response != null)
+            {
+                return response;
+            }
+
+            throw new SportNotFoundException();
+
+
+            
+        }
 
 
 

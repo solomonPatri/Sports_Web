@@ -8,14 +8,12 @@ namespace Sports_Web.Sport.Service
         Task<List<Sports>> GetAllAsync();
 
 
-        Task<SportResponse> FindByNameAsync(SportRequest Name);
+        Task<SportResponse> FindByNameAsync(string Name);
 
         Task<SportResponse> FindByIdAsync(int id);
 
 
-
-
-
+        Task<SportNamesList> GetSportsNamesAsync();
 
     }
 }

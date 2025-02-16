@@ -101,12 +101,12 @@ namespace Sports_Web.Sport.Repository
         }
 
 
-        public async Task<SportResponse> FindByNameAsync(SportRequest sports)
+        public async Task<SportResponse> FindByNameAsync(string sports)
         {
 
 
 
-            Sports sportsSearched= await _appDbContext.Sports.FirstOrDefaultAsync(s=> s.Name.Equals(sports.Name));
+            Sports sportsSearched= await _appDbContext.Sports.FirstOrDefaultAsync(s=> s.Name.Equals(sports));
 
             SportResponse response = _mapper.Map<SportResponse>(sportsSearched);
 
@@ -127,8 +127,19 @@ namespace Sports_Web.Sport.Repository
 
 
         }
-       
 
+        public async Task<SportNamesList> GetSportsNamesAsync()
+        {
+            List<string> names = await _appDbContext.Sports.Select(s => s.Name).ToListAsync();
+
+            SportNamesList response = new SportNamesList();
+
+            response.Names = names;
+            
+            return response;
+
+
+        }
 
 
 

@@ -19,7 +19,7 @@ namespace Sports_Web.Sport.Service
 
         public async Task<SportResponse> CreateSportAsync(SportRequest sportrequest)
         {
-            SportResponse sportexist = await this._repo.FindByNameAsync(sportrequest);
+            SportResponse sportexist = await this._repo.FindByNameAsync(sportrequest.Name);
 
             if (sportexist == null)
             {

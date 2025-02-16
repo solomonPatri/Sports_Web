@@ -90,12 +90,69 @@ namespace Sports_Web.Sport
             }
             catch (SportNotFoundException not)
             {
-              return NotFound(not.Message);
+                return NotFound(not.Message);
+            }
+
+
+        }
+
+        [HttpGet("SportsNames")]
+
+
+        public async Task<ActionResult<SportNamesList>> GetSportsNamesAsync()
+        {
+            try
+            {
+
+                SportNamesList response = await _queryService.GetSportsNamesAsync();
+                return Accepted("",response);
+
+            }catch(SportNotFoundException nf)
+            {
+                return NotFound(nf.Message);
+            }
+
+
+        }
+
+        [HttpGet ("find/name/{name}")]
+
+        public async Task<ActionResult<SportResponse>> FindByNameAsync([FromRoute] string name)
+        {
+
+            try
+            {
+                SportResponse response = await _queryService.FindByNameAsync(name);
+                return Accepted("",response);
+
+            }catch(SportNotFoundException nf)
+            {
+                return NotFound(nf.Message);
             }
 
 
 
 
+
+        }
+
+
+        [HttpGet("find/Sport/{id}")]
+
+        public async Task<ActionResult<SportResponse>> FindById(int id)
+        {
+            try
+            {
+                SportResponse response = await _queryService.FindByIdAsync(id);
+                return Accepted("", response);
+            }catch(SportNotFoundException nf)
+            {
+                return NotFound(nf.Message);
+            }
+
+
+
+        }
 
 
 
@@ -187,6 +244,6 @@ namespace Sports_Web.Sport
 
 
 
-        }
+        
     }
 }
